@@ -17,9 +17,7 @@
     "vue": "^2.4.2",
     "vue-router": "^2.6.0",
     "vuetify": "^0.14.11",
-    "vuex": "^2.3.1"
-  },
-  "devDependencies": {
+    "vuex": "^2.3.1",
     "autoprefixer": "^7.1.2",
     "babel-core": "^6.22.1",
     "babel-eslint": "^7.1.1",
@@ -64,6 +62,8 @@
     "webpack-dev-middleware": "^1.10.0",
     "webpack-hot-middleware": "^2.18.0",
     "webpack-merge": "^4.1.0"
+  },
+  "devDependencies": {    
   },
   "engines": {
     "node": ">= 4.0.0",
