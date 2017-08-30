@@ -14,7 +14,7 @@ function redirect (user, to, from, next) {
 export default (to, from, next) => {
   const user = store.getters.user
   if (!user) {
-    localforage.getItem('icescreamer-user')
+    localforage.getItem('iceScreamerUser')
     .then((user) => {
       if (user) {
         store.dispatch('autoSignIn', user)

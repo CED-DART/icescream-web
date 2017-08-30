@@ -49,11 +49,11 @@ export const store = new Vuex.Store({
         const data = user.data
         if (data) {
           const newUser = {
-            id: user.IdUser,
-            name: user.Name,
-            email: user.Email,
-            acceptedTems: user.AcceptedTemsDate != null,
-            admin: user.IsAdmin
+            id: data.idUser,
+            name: data.name,
+            email: data.email,
+            acceptedTems: data.acceptedTemsDate !== null,
+            admin: false
           }
           localforage.setItem('iceScreamerUser', newUser)
             .then(() => {
@@ -129,9 +129,7 @@ export const store = new Vuex.Store({
               name: obj[key].name,
               email: obj[key].email,
               birthDate: obj[key].birthDate,
-              admissionDate: obj[key].admissionDate,
-              acceptedTemsDate: obj[key].acceptedTemsDate,
-              created: obj[key].created
+              admissionDate: obj[key].admissionDate
             })
           }
           commit('setUsers', users)
