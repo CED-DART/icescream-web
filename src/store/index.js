@@ -45,6 +45,7 @@ export const store = new Vuex.Store({
         password: payload.password
       })
       .then((user) => {
+        console.log(process.env.API_URL)
         commit('setLoading', false)
         const data = user.data
         if (data) {

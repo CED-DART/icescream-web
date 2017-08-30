@@ -1,6 +1,6 @@
 import axios from 'axios'
 
 export const HTTP = axios.create({
-  baseURL: process.env.API_URL,
+  baseURL: 'http://icescreamapi.azurewebsites.net/api/',
   headers: { 'Content-Type': 'application/json' }
 })
