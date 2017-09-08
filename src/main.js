@@ -20,8 +20,6 @@ Vue.filter('date', DateFilter)
 Vue.filter('phone', PhoneFilter)
 Vue.filter('money', MoneyFilter)
 
-console.log(process.env.API_URL)
-
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
