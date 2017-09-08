@@ -84,6 +84,7 @@ export default {
   methods: {
     onRecovery () {
       this.$store.dispatch('recoveryUserPassword', this.email)
+      this.email = ''
     },
     goBack () {
       this.$store.dispatch('clearResponse')

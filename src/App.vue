@@ -95,4 +95,8 @@
 <style lang="stylus">
   @import './stylus/main'
   @import './stylus/logo'
+
+  .application > main > .container {
+    min-height: 93vh;
+  }
 </style>

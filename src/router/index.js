@@ -5,9 +5,7 @@ import Home from '@/components/Home'
 import Login from '@/components/User/Login'
 import RecoveryPassword from '@/components/User/Recovery'
 import Shops from '@/components/Shop/Shops'
-import Shop from '@/components/Shop/Shop'
 import CreateShop from '@/components/Shop/Create'
-import EditShop from '@/components/Shop/Edit'
 import Users from '@/components/User/Users'
 import User from '@/components/User/User'
 import CreateUser from '@/components/User/Create'
@@ -46,29 +44,21 @@ export default new Router({
       beforeEnter: AuthGuard
     },
     {
-      path: '/shop/:id',
-      name: 'Ice Cream Shop Details',
-      props: true,
-      component: Shop,
-      beforeEnter: AuthGuard
-    },
-    {
-      path: '/shop/new',
+      path: '/shops/new',
       name: 'Create Ice Cream Shop',
       component: CreateShop,
-      beforeEnter: AuthGuard
-    },
-    {
-      path: '/shop/edit/:id',
-      name: 'Edit Ice Cream Shop',
-      props: true,
-      component: EditShop,
       beforeEnter: AuthGuard
     },
     {
       path: '/users',
       name: 'Users',
       component: Users,
+      beforeEnter: AuthGuard
+    },
+    {
+      path: '/user/new',
+      name: 'Create User',
+      component: CreateUser,
       beforeEnter: AuthGuard
     },
     {
@@ -79,14 +69,8 @@ export default new Router({
       beforeEnter: AuthGuard
     },
     {
-      path: '/user/new',
-      name: 'Create User',
-      component: CreateUser,
-      beforeEnter: AuthGuard
-    },
-    {
       path: '/user/edit/:id',
-      name: 'Edit User',
+      name: 'Edit User Details',
       props: true,
       component: EditUser,
       beforeEnter: AuthGuard

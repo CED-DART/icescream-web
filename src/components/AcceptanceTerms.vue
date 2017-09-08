@@ -1,5 +1,10 @@
 <template>
   <v-container>
+    <v-layout row v-if="response.message !== null">
+      <v-flex xs12>
+        <app-alert @dismissed="onDismissed" :response="response" class="mb-4"></app-alert>
+      </v-flex>
+    </v-layout>
     <v-layout row>
       <v-flex xs12 class="text-xs-center">
         <h3 class="primary--text">Termo de Aceite</h3>
@@ -33,27 +38,31 @@
         <p>Copo furadis é disculpa de bebadis, arcu quam euismod magna. Detraxit consequat et quo num tendi nada. Leite de capivaris, leite de mula manquis sem cabeça. Praesent malesuada urna nisi, quis volutpat erat hendrerit non. Nam vulputate dapibus.</p>
       </v-flex>
     </v-layout>
-    <v-layout row v-if="!user.acceptedTems">
+    <v-layout row v-if="!user.acceptedTerms">
       <v-flex xs12>
-        <v-checkbox v-model="accepted" dark color="primary" :label="checkboxLabel"></v-checkbox>
+        <v-checkbox v-model="accepted" dark color="primary" :label="checkboxLabel" class="mt-4"></v-checkbox>
       </v-flex>
     </v-layout>
-    <v-layout row>
-      <v-flex xs>
-        <p class="primary--text mt-4" style="font-size: 1.3em;">Lido e aceito em 10/08/2017</p>
-      </v-flex>
-    </v-layout>
-    <v-layout row v-if="!user.acceptedTems">
+    <v-layout row v-if="!user.acceptedTerms">
       <v-flex xs12 class="text-xs-right">
         <v-btn 
           class="primary" 
           :disabled="!readed || !accepted"
+          :loading="loading"
           @click="onAcceptTerms">
-          <span>
+          <!-- <span>
             <v-icon dark>check</v-icon>
+          </span> -->
+          <span slot="loader" class="custom-loader">
+            <v-icon dark>cached</v-icon>
           </span>
-          Entrar
-        </v-btn>
+          Continuar
+        </v-btn>        
+      </v-flex>
+    </v-layout>
+    <v-layout row v-if="user.acceptedTerms">
+      <v-flex xs>
+        <p class="primary--text mt-4" style="font-size: 1.3em;">Lido e aceito em {{user.acceptedTermsDate | date}}</p>
       </v-flex>
     </v-layout>
   </v-container>
@@ -71,6 +80,12 @@
     computed: {
       user () {
         return this.$store.getters.user
+      },
+      response () {
+        return this.$store.getters.response
+      },
+      loading () {
+        return this.$store.getters.loading
       }
     },
     methods: {
@@ -81,9 +96,13 @@
         }
       },
       onAcceptTerms () {
-        const user = this.$store.getters.user
-        this.$store.dispatch('acceptTerms', user)
-        this.$router.push('/')
+        this.$store.dispatch('acceptTerms', this.user)
+          .then(() => {
+            this.$router.push('/')
+          })
+      },
+      onDismissed () {
+        this.$store.dispatch('clearResponse')
       }
     }
   }

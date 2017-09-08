@@ -4,7 +4,7 @@ import localforage from 'localforage'
 function redirect (user, to, from, next) {
   if (!user) {
     next('/login')
-  } else if (!user.acceptedTems && to.path !== '/terms') {
+  } else if (!user.acceptedTerms && to.path !== '/terms') {
     next('/terms')
   } else {
     next()

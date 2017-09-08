@@ -16,7 +16,7 @@ export default {
   props: ['response'],
   data () {
     return {
-      error: true,
+      error: false,
       info: false,
       warning: false,
       success: false
@@ -25,12 +25,14 @@ export default {
   created () {
     if (this.response.type === 'error') {
       this.error = true
-    } else if (this.type === 'info') {
-      this.response.type = true
-    } else if (this.type === 'warning') {
-      this.response.type = true
-    } else if (this.type === 'success') {
-      this.response.type = true
+    } else if (this.response.type === 'info') {
+      this.info = true
+    } else if (this.response.type === 'warning') {
+      this.warning = true
+    } else if (this.response.type === 'success') {
+      this.success = true
+    } else {
+      this.info = true
     }
   },
   methods: {
