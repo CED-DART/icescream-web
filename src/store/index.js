@@ -109,7 +109,7 @@ export const store = new Vuex.Store({
       commit('setUser', payload)
     },
     logout ({commit}) {
-      localforage.removeItem('icescreamer-user')
+      localforage.removeItem('iceScreamerUser')
       .then(() => {
         commit('setUser', null)
       })
