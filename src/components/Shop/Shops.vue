@@ -2,7 +2,7 @@
   <v-layout>
     <v-flex xs12>
       <v-layout row v-if="response.message !== null">
-        <v-flex xs12>
+        <v-flex xs12 lg10 offset-lg1>
           <app-alert @dismissed="onDismissed" :response="response"></app-alert>
         </v-flex>
       </v-layout>
@@ -73,8 +73,8 @@
                     </v-list-tile-avatar>
                   </v-list>                  
                 </v-card-text>
-                <v-divider v-if="!user.admin"></v-divider>
-                <v-card-actions v-if="!user.admin">
+                <v-divider v-if="user.admin"></v-divider>
+                <v-card-actions v-if="user.admin">
                   <v-spacer></v-spacer>
                   <app-edit-dialog :shop="shop"></app-edit-dialog>
                 </v-card-actions>

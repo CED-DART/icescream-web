@@ -17,24 +17,25 @@
               <v-text-field 
                 name="name" 
                 label="Nome"
-                v-model="editedName" 
+                v-model="shop.name" 
                 id="name"
                 required></v-text-field>
               <v-text-field 
                 name="address"
                 label="Endereço"
-                v-model="editedAddress"
+                v-model="shop.address"
                 id="address"
                 required></v-text-field>
               <v-text-field 
                 name="phone" 
                 label="Telefone"
-                v-model="editedPhone" 
+                v-model="shop.phone"
+                placeholder="Ex.: (99) 9999-9999 / (99) 99999-9999" 
                 id="phone"></v-text-field>
               <v-text-field 
                 name="paymentMethods" 
                 label="Formas de Pagamento"
-                v-model="editedPaymentMethods" 
+                v-model="shop.paymentMethods" 
                 id="paymentMethods"></v-text-field>
               <v-text-field 
                 name="averagePrice" 
@@ -67,24 +68,23 @@ export default {
     return {
       showDialog: false,
       title: 'Editar Sorveteria',
-      editedName: this.shop.name,
-      editedAddress: this.shop.address,
-      editedPhone: this.shop.phone,
-      editedPaymentMethods: this.shop.paymentMethods,
-      editedAveragePrice: this.shop.averagePrice !== null ? parseFloat(this.shop.averagePrice).toFixed(2).replace(',', '').replace('.', ',') : '0,00'
+      editedAveragePrice: parseFloat(this.shop.averagePrice).toFixed(2).replace(',', '').replace('.', ',')
     }
   },
   methods: {
     onSaveChanges () {
-      if (this.editedName.trim() === '' || this.editedAddress.trim() === '') {
+      if (this.shop.name.trim() === '' || this.shop.address.trim() === '') {
         return
       }
-      this.shop.name = this.editedName
-      this.shop.address = this.editedAddress
-      this.shop.phone = this.editedPhone
-      this.shop.paymentMethods = this.editedPaymentMethods
       this.shop.averagePrice = parseFloat(this.editedAveragePrice.replace(',', '.'))
-      this.$store.dispatch('updateIceCreamShop', this.shop)
+      this.$store.dispatch('updateIceCreamShop', {
+        idIceCreamShop: this.shop.id,
+        name: this.shop.name,
+        address: this.shop.address,
+        phone: this.shop.phone,
+        averagePrice: parseFloat(this.editedAveragePrice.replace(',', '.')),
+        paymentMethods: this.shop.paymentMethods
+      })
       this.showDialog = false
     }
   }

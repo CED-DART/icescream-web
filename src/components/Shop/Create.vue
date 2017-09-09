@@ -40,6 +40,7 @@
                   label="Telefone" 
                   id="phone" 
                   v-model="phone"
+                  placeholder="Ex.: (99) 9999-9999 / (99) 99999-9999" 
                   prepend-icon="phone"></v-text-field>
               </v-flex>
             </v-layout>

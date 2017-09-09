@@ -2,7 +2,7 @@ export default (value) => {
   if (value === null || value === '' || !value) {
     return ' - '
   }
-  const phone = value.toString().trim().replace(' ', '').replace('(', '').replace(')', '').replace('-', '')
+  const phone = value.toString().trim().replace(/[^\w\s]/g, '').replace(/\s/g, '')
   if (value.length < 10) {
     return value
   }
