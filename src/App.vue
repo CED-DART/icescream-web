@@ -37,7 +37,7 @@
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-xs-only">
         <v-btn flat router to="/profile">
-          <v-icon left>face</v-icon>
+          <v-icon left>settings</v-icon>
           Meu Perfil
         </v-btn>
         <v-btn flat @click="onLogout">
@@ -53,9 +53,6 @@
         </v-slide-y-transition>
       </v-container>
     </main>
-    <!-- <v-footer>
-      <span>&copy; 2017</span>
-    </v-footer> -->
   </v-app>
 </template>
 

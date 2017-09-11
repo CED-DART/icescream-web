@@ -46,7 +46,21 @@ export default {
         { title: 'Pre-fab homes', src: '../../static/profile.jpg', flex: 12 },
         { title: 'Favorite road trips', src: '../../static/profile.jpg', flex: 6 },
         { title: 'Best airlines', src: '../../static/profile.jpg', flex: 6 }
-      ]
+      ],
+      debtors: null
+    }
+  },
+  created () {
+    this.$store.dispatch('loadUserDebtors', 3)
+  },
+  computed: {
+    debtorsList () {
+      return this.$store.getters.debtors
+    }
+  },
+  watch: {
+    debtorsList (value) {
+      this.debtors = value
     }
   }
 }

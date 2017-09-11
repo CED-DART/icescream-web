@@ -11,6 +11,7 @@ export const store = new Vuex.Store({
     user: null,
     users: [],
     shops: [],
+    debtors: [],
     loading: false,
     response: {
       type: null,
@@ -38,6 +39,9 @@ export const store = new Vuex.Store({
     },
     setShops (state, payload) {
       state.shops = payload
+    },
+    setDebtors (state, payload) {
+      state.debtors = payload
     }
   },
   actions: {
@@ -360,6 +364,38 @@ export const store = new Vuex.Store({
           commit('setResponse', response)
           commit('setLoading', false)
         })
+    },
+    loadUserDebtors ({commit}, payload) {
+      commit('setLoading', true)
+      commit('clearResponse')
+      HTTP.get('UserDebtor/GetPending', {
+        params: {
+          maximumItems: payload === undefined ? null : payload
+        }
+      })
+        .then((data) => {
+          const debtors = []
+          const obj = data.data
+          for (let key in obj) {
+            debtors.push({
+              id: obj[key].idUserDebtor,
+              name: obj[key].userName,
+              contact: obj[key].userContact,
+              date: obj[key].debitDate,
+              reason: obj[key].reason
+            })
+          }
+          commit('setDebtors', debtors)
+          commit('setLoading', false)
+        })
+        .catch((error) => {
+          const response = {
+            type: 'error',
+            message: error.message
+          }
+          commit('setResponse', response)
+          commit('setLoading', false)
+        })
     }
   },
   getters: {
@@ -377,6 +413,9 @@ export const store = new Vuex.Store({
     },
     shops (state) {
       return state.shops
+    },
+    debtors (state) {
+      return state.debtors
     }
   }
 })
