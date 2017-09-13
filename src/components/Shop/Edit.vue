@@ -17,25 +17,25 @@
               <v-text-field 
                 name="name" 
                 label="Nome"
-                v-model="shop.name" 
+                v-model="editedName" 
                 id="name"
                 required></v-text-field>
               <v-text-field 
                 name="address"
                 label="Endereço"
-                v-model="shop.address"
+                v-model="editedAddress"
                 id="address"
                 required></v-text-field>
               <v-text-field 
                 name="phone" 
                 label="Telefone"
-                v-model="shop.phone"
+                v-model="editedPhone"
                 placeholder="Ex.: (99) 9999-9999 / (99) 99999-9999" 
                 id="phone"></v-text-field>
               <v-text-field 
                 name="paymentMethods" 
                 label="Formas de Pagamento"
-                v-model="shop.paymentMethods" 
+                v-model="editedPaymentMethods" 
                 id="paymentMethods"></v-text-field>
               <v-text-field 
                 name="averagePrice" 
@@ -68,6 +68,10 @@ export default {
     return {
       showDialog: false,
       title: 'Editar Sorveteria',
+      editedName: this.shop.name,
+      editedAddress: this.shop.address,
+      editedPhone: this.shop.phone,
+      editedPaymentMethods: this.shop.paymentMethods,
       editedAveragePrice: parseFloat(this.shop.averagePrice).toFixed(2).replace(',', '').replace('.', ',')
     }
   },
@@ -79,11 +83,11 @@ export default {
       this.shop.averagePrice = parseFloat(this.editedAveragePrice.replace(',', '.'))
       this.$store.dispatch('updateIceCreamShop', {
         idIceCreamShop: this.shop.id,
-        name: this.shop.name,
-        address: this.shop.address,
-        phone: this.shop.phone,
+        name: this.editedName,
+        address: this.editedAddress,
+        phone: this.editedPhone,
         averagePrice: parseFloat(this.editedAveragePrice.replace(',', '.')),
-        paymentMethods: this.shop.paymentMethods
+        paymentMethods: this.editedPaymentMethods
       })
       this.showDialog = false
     }

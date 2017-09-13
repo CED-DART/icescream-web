@@ -1,6 +1,6 @@
 <template>
   <v-dialog width="350px" persistent v-model="showDialog">
-    <v-btn icon small light slot="activator" v-tooltip:top="{ html: title }">
+    <v-btn icon light slot="activator" v-tooltip:top="{ html: title }" :class="isPrimary ? 'primary--text' : ''">
       <v-icon>{{icon}}</v-icon>
     </v-btn>
     <v-card>
@@ -17,7 +17,7 @@
 
 <script>
 export default {
-  props: ['icon', 'title', 'message'],
+  props: ['icon', 'title', 'message', 'isPrimary'],
   data () {
     return {
       showDialog: false

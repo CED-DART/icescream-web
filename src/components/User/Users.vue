@@ -56,7 +56,6 @@
               <td class="text-xs-center">
                 <v-btn 
                   icon 
-                  small 
                   light 
                   router 
                   :to="'/user/' + props.item.id" 
@@ -65,7 +64,6 @@
                 </v-btn>
                 <v-btn 
                   icon 
-                  small 
                   light 
                   router 
                   :to="'/user/edit/' + props.item.id" 

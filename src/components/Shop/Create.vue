@@ -116,7 +116,6 @@ export default {
       if (!this.formIsValid) {
         return
       }
-      alert('')
       const iceCreamShop = {
         name: this.name,
         address: this.address,

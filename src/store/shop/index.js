@@ -7,6 +7,31 @@ export default {
   mutations: {
     setShops (state, payload) {
       state.shops = payload
+    },
+    updateIceCreamShop (state, payload) {
+      const shop = state.shops.find(shop => {
+        return shop.id === payload.idIceCreamShop
+      })
+      if (payload.name) {
+        shop.name = payload.name
+      }
+      if (payload.address) {
+        shop.address = payload.address
+      }
+      if (payload.phone) {
+        shop.phone = payload.phone
+      }
+      if (payload.averagePrice) {
+        shop.averagePrice = payload.averagePrice
+      }
+      if (payload.paymentMethods) {
+        shop.paymentMethods = payload.paymentMethods
+      }
+    },
+    deleteIceCreamShop (state, payload) {
+      const shops = state.shops
+      shops.splice(shops.findIndex(shop => shop.id === payload), 1)
+      // Reflect.deleteProperty(state.user.fbKeys, payload)
     }
   },
   actions: {
@@ -50,6 +75,7 @@ export default {
           }
           commit('setResponse', response)
           commit('setLoading', false)
+          commit('updateIceCreamShop', payload)
         })
         .catch((error) => {
           const response = {
@@ -62,7 +88,7 @@ export default {
     },
     createIceCreamShop ({commit}, payload) {
       commit('setLoading', true)
-      HTTP.post('IceCreamShop', payload)
+      HTTP.post('IceCreamShop/Add', payload)
         .then(() => {
           const response = {
             type: 'success',
@@ -70,6 +96,31 @@ export default {
           }
           commit('setResponse', response)
           commit('setLoading', false)
+        })
+        .catch((error) => {
+          const response = {
+            type: 'error',
+            message: error.message
+          }
+          commit('setResponse', response)
+          commit('setLoading', false)
+        })
+    },
+    deleteIceCreamShop ({commit}, payload) {
+      commit('setLoading', true)
+      HTTP.delete('IceCreamShop', {
+        params: {
+          id: payload
+        }
+      })
+        .then(() => {
+          const response = {
+            type: 'success',
+            message: 'Sorveteria excluída com sucesso.'
+          }
+          commit('setResponse', response)
+          commit('setLoading', false)
+          commit('deleteIceCreamShop', payload)
         })
         .catch((error) => {
           const response = {

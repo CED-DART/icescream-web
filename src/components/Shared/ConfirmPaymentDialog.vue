@@ -1,6 +1,6 @@
 <template>
   <v-dialog width="350px" persistent v-model="showDialog">
-    <v-btn icon small slot="activator" v-tooltip:top="{ html: 'Confirmar Pagamento' }" class="primary--text">
+    <v-btn icon small slot="activator" v-tooltip:top="{ html: title }" class="primary--text">
       <v-icon>check</v-icon>
     </v-btn>
     <v-card>
@@ -63,6 +63,7 @@
 
 <script>
 export default {
+  props: ['title', 'debtor'],
   data () {
     return {
       showDialog: false

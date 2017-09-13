@@ -76,6 +76,13 @@
                 <v-divider v-if="user.admin"></v-divider>
                 <v-card-actions v-if="user.admin">
                   <v-spacer></v-spacer>
+                  <app-confirm-dialog 
+                    @confirmed="onDialogConfirmed(shop.id)" 
+                    icon="delete" 
+                    title="Excluir Sorveteria" 
+                    :message="setDialogMessage(shop.name)"
+                    :isPrimary="true">
+                  </app-confirm-dialog>
                   <app-edit-dialog :shop="shop"></app-edit-dialog>
                 </v-card-actions>
               </v-card>
@@ -120,11 +127,26 @@
     watch: {
       items (value) {
         this.shops = value
+      },
+      response (value) {
+        if (value !== null && value.type !== null) {
+          if (value.type === 'success') {
+            setTimeout(() => {
+              this.$store.dispatch('clearResponse')
+            }, 2500)
+          }
+        }
       }
     },
     methods: {
       onDismissed () {
         this.$store.dispatch('clearResponse')
+      },
+      setDialogMessage (shopName) {
+        return `Deseja realmente excluir a sorveteria '${shopName}'`
+      },
+      onDialogConfirmed (shopId) {
+        this.$store.dispatch('deleteIceCreamShop', shopId)
       }
     }
   }

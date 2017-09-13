@@ -53,10 +53,12 @@
                     </v-list-tile-avatar>
                   </v-list>                  
                 </v-card-text>
-                <v-divider v-if="!user.admin"></v-divider>
-                <v-card-actions v-if="!user.admin">
+                <v-divider v-if="user.admin"></v-divider>
+                <v-card-actions v-if="user.admin">
                   <v-spacer></v-spacer>
-                  <app-confirm-payment-dialog></app-confirm-payment-dialog>
+                  <app-confirm-payment-dialog
+                    title='Confirmar Pagamento'>
+                  </app-confirm-payment-dialog>
                 </v-card-actions>
               </v-card>
             </v-flex>
