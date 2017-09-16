@@ -75,7 +75,8 @@ export default {
     return {
       user: null,
       formatedBirthDate: '',
-      formatedAdmissionDate: ''
+      formatedAdmissionDate: '',
+      defaultImage: '../../../static/profile.png'
     }
   },
   created () {
@@ -95,7 +96,7 @@ export default {
     users (value) {
       if (value.length > 0) {
         this.user = value[0]
-        this.user.imageUrl = 'https://www.gcfaprendelivre.org/files/personage/image/11/R_p.png'
+        this.user.imageUrl = (value[0].imageUrl !== null || value[0].imageUrl !== '') ? value[0].imageUrl : this.defaultImage
         this.formatedBirthDate = DateFilter(this.user.birthDate)
         this.formatedAdmissionDate = DateFilter(this.user.admissionDate)
       }

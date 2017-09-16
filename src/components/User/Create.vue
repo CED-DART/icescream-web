@@ -192,7 +192,8 @@ export default {
         birthDate: this.birthDate,
         admissionDate: this.admissionDate,
         contact: this.contact,
-        password: this.password
+        password: this.password,
+        imageURL: this.imageUrl
       }
       this.$store.dispatch('createUser', userData)
       this.$router.push('/users')

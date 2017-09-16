@@ -36,6 +36,7 @@ export default {
             acceptedTermsDate: data.acceptedTemsDate,
             birthDate: data.birthDate,
             admissionDate: data.admissionDate,
+            imageUrl: data.imageURL,
             admin: data.isAdmin
           }
           localforage.setItem('iceScreamerUser', newUser)
@@ -132,6 +133,7 @@ export default {
               email: obj[key].email,
               birthDate: obj[key].birthDate,
               admissionDate: obj[key].admissionDate,
+              imageUrl: obj[key].imageURL,
               actived: obj[key].disabled !== undefined ? obj[key].disabled : true
             })
           }
@@ -165,7 +167,8 @@ export default {
             birthDate: user.birthDate,
             admissionDate: user.admissionDate,
             created: user.created,
-            contact: user.contact
+            contact: user.contact,
+            imageUrl: user.imageURL
           })
           commit('setUsers', users)
           commit('setLoading', false)

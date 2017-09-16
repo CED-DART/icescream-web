@@ -24,7 +24,7 @@
           </v-layout>
           <v-layout row>
             <v-flex xs12 class="text-xs-center">
-              <img :src="editedImageUrl" height="210px" class="userProfileImage">
+              <img :src="(editedImageUrl === '' || editedImageUrl === null) ? defaultImageUrl : editedImageUrl" height="210px" class="userProfileImage">
             </v-flex>
           </v-layout>
           <form @submit.prevent="onEditUser">
@@ -160,7 +160,7 @@ export default {
   props: ['id'],
   data () {
     return {
-      defaultImageUrl: 'https://www.gcfaprendelivre.org/files/personage/image/11/R_p.png',
+      defaultImageUrl: '../../../static/profile.png',
       editedImageUrl: '',
       editedName: '',
       editedEmail: '',
@@ -206,7 +206,7 @@ export default {
         this.editedContact = value[0].contact
         this.editedBirthDate = value[0].birthDate
         this.editedAdmissionDate = value[0].admissionDate
-        this.editedImageUrl = value[0].imageUrl !== undefined ? value[0].imageUrl : this.defaultImageUrl
+        this.editedImageUrl = value[0].imageUrl
         this.formatedBirthDate = moment(this.editedBirthDate).format('DD/MM/YYYY')
         this.formatedAdmissionDate = moment(this.editedAdmissionDate).format('DD/MM/YYYY')
       }
@@ -225,7 +225,8 @@ export default {
         birthDate: moment(this.editedBirthDate).format('YYYY-MM-DDTHH:mm:ss'),
         admissionDate: moment(this.editedAdmissionDate).format('YYYY-MM-DDTHH:mm:ss'),
         contact: this.editedContact,
-        password: this.newPassword
+        password: this.newPassword,
+        imageURL: this.editedImageUrl
       })
       .then(() => {
         this.posting = false
