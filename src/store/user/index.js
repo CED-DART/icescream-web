@@ -36,7 +36,7 @@ export default {
             acceptedTermsDate: data.acceptedTemsDate,
             birthDate: data.birthDate,
             admissionDate: data.admissionDate,
-            admin: false
+            admin: data.isAdmin
           }
           localforage.setItem('iceScreamerUser', newUser)
             .then(() => {

@@ -14,35 +14,7 @@
         <v-layout row wrap>
           <v-flex xs12>
             <v-card-text>
-              <!-- <v-text-field 
-                name="name" 
-                label="Nome"
-                v-model="shop.name" 
-                id="name"
-                required></v-text-field>
-              <v-text-field 
-                name="address"
-                label="Endereço"
-                v-model="shop.address"
-                id="address"
-                required></v-text-field>
-              <v-text-field 
-                name="phone" 
-                label="Telefone"
-                v-model="shop.phone"
-                placeholder="Ex.: (99) 9999-9999 / (99) 99999-9999" 
-                id="phone"></v-text-field>
-              <v-text-field 
-                name="paymentMethods" 
-                label="Formas de Pagamento"
-                v-model="shop.paymentMethods" 
-                id="paymentMethods"></v-text-field>
-              <v-text-field 
-                name="averagePrice" 
-                label="Média de Preço"
-                v-model="editedAveragePrice" 
-                prefix="R$" 
-                id="averagePricetitle"></v-text-field> -->
+              
             </v-card-text>
           </v-flex>
         </v-layout>
@@ -83,6 +55,7 @@ export default {
       //   averagePrice: parseFloat(this.editedAveragePrice.replace(',', '.')),
       //   paymentMethods: this.shop.paymentMethods
       // })
+      console.log(this.debtor)
       this.showDialog = false
     }
   }

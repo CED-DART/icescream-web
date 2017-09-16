@@ -24,7 +24,7 @@
         <v-flex xs12 lg10 offset-lg1>
           <v-layout row>
             <v-flex xs12>
-              <v-btn fab dark small class="primary" v-if="!user.admin" @click.prevent="onRunScript" v-tooltip:right="{ html: 'Rodar Script de Devedores' }">
+              <v-btn fab dark small class="primary" v-if="user.admin" @click.prevent="onRunScript" v-tooltip:right="{ html: 'Rodar Script de Devedores' }">
                 <v-icon dark>add</v-icon>
               </v-btn>
             </v-flex>
@@ -33,7 +33,10 @@
             <v-flex xs12 sm6 md4 lg3 v-for="debtor in debtors" :key="debtor.id" class="mb-2">
               <v-card>
                 <v-card-text>
-                  <h3 class="primary--text headline mb-3">{{debtor.name}}</h3>
+                  <v-flex xs12 class="text-xs-center">
+                    <img :src="debtor.imageUrl === undefined ? defaultImageUrl : debtor.imageUrl" height="100px" class="userProfileImage">
+                  </v-flex>
+                  <h3 class="primary--text headline mb-3 text-xs-center">{{debtor.name}}</h3>
                   <v-list subheader>
                     <v-list-tile-avatar>
                       <v-list-tile-action>
@@ -53,11 +56,12 @@
                     </v-list-tile-avatar>
                   </v-list>                  
                 </v-card-text>
-                <v-divider v-if="user.admin"></v-divider>
-                <v-card-actions v-if="user.admin">
+                <v-divider v-if="!user.admin"></v-divider>
+                <v-card-actions v-if="!user.admin">
                   <v-spacer></v-spacer>
                   <app-confirm-payment-dialog
-                    title='Confirmar Pagamento'>
+                    title='Confirmar Pagamento'
+                    :debtor="debtor">
                   </app-confirm-payment-dialog>
                 </v-card-actions>
               </v-card>
@@ -73,6 +77,7 @@
   export default {
     data () {
       return {
+        defaultImageUrl: 'https://www.gcfaprendelivre.org/files/personage/image/11/R_p.png',
         debtors: []
       }
     },
@@ -103,8 +108,15 @@
         this.$store.dispatch('clearResponse')
       },
       onRunScript () {
-        alert('Em breve')
+        this.$store.dispatch('createPendingDebtors')
       }
     }
   }
 </script>
+
+<style scoped>
+.userProfileImage {
+  background-color: white;
+  border-radius: 110px;
+}
+</style>
