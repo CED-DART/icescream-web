@@ -182,6 +182,9 @@ export default {
         newPassword: this.newPassword
       })
       .then(() => {
+        this.currentPassword = ''
+        this.newPassword = ''
+        this.confirmedNewPassword = ''
         this.posting = false
       })
     },

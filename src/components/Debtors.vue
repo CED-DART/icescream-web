@@ -33,31 +33,35 @@
             <v-flex xs12 sm6 md4 lg3 v-for="debtor in debtors" :key="debtor.id" class="mb-2">
               <v-card>
                 <v-card-text>
-                  <v-flex xs12 class="text-xs-center">
-                    <img :src="debtor.imageUrl === undefined ? defaultImageUrl : debtor.imageUrl" height="100px" class="userProfileImage">
-                  </v-flex>
-                  <h3 class="primary--text headline mb-3 text-xs-center">{{debtor.name}}</h3>
-                  <v-list subheader>
-                    <v-list-tile-avatar>
-                      <v-list-tile-action>
-                        <v-icon>event</v-icon>
-                      </v-list-tile-action>
-                      <v-list-tile-content>
-                        <v-list-tile-title>{{debtor.date | date}}</v-list-tile-title>
-                      </v-list-tile-content>
-                    </v-list-tile-avatar>
-                    <v-list-tile-avatar class="mt-2">
-                      <v-list-tile-action>
-                        <v-icon>{{debtor.reason === 'Contrato' ? 'work' : 'cake'}}</v-icon>
-                      </v-list-tile-action>
-                      <v-list-tile-content>
-                        <v-list-tile-title>{{debtor.reason}}</v-list-tile-title>
-                      </v-list-tile-content>
-                    </v-list-tile-avatar>
-                  </v-list>                  
+                  <v-layout row>
+                    <v-flex xs4 class="text-xs-center">
+                      <img :src="debtor.imageUrl === null || debtor.imageUrl === '' ? defaultImageUrl : debtor.imageUrl" height="100px" class="userProfileImage mt-2">
+                    </v-flex>
+                    <v-flex xs8>
+                      <span class="primary--text headline mb-3">{{debtor.name}}</span>
+                      <v-list subheader>
+                        <v-list-tile-avatar>
+                          <v-list-tile-action>
+                            <v-icon>event</v-icon>
+                          </v-list-tile-action>
+                          <v-list-tile-content>
+                            <v-list-tile-title>{{debtor.date | date}}</v-list-tile-title>
+                          </v-list-tile-content>
+                        </v-list-tile-avatar>
+                        <v-list-tile-avatar class="mt-2">
+                          <v-list-tile-action>
+                            <v-icon>{{debtor.reason === 'Contrato' ? 'work' : 'cake'}}</v-icon>
+                          </v-list-tile-action>
+                          <v-list-tile-content>
+                            <v-list-tile-title>{{debtor.reason}}</v-list-tile-title>
+                          </v-list-tile-content>
+                        </v-list-tile-avatar>
+                      </v-list>
+                    </v-flex>
+                  </v-layout>                                    
                 </v-card-text>
-                <v-divider v-if="!user.admin"></v-divider>
-                <v-card-actions v-if="!user.admin">
+                <v-divider v-if="user.admin"></v-divider>
+                <v-card-actions v-if="user.admin">
                   <v-spacer></v-spacer>
                   <app-confirm-payment-dialog
                     title='Confirmar Pagamento'
@@ -77,7 +81,7 @@
   export default {
     data () {
       return {
-        defaultImageUrl: 'https://www.gcfaprendelivre.org/files/personage/image/11/R_p.png',
+        defaultImageUrl: '../../static/profile.png',
         debtors: []
       }
     },

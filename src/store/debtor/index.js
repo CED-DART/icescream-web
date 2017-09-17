@@ -28,7 +28,7 @@ export default {
             debtors.push({
               id: obj[key].idUserDebtor,
               name: obj[key].userName,
-              imageUrl: obj[key].imageUrl,
+              imageUrl: obj[key].imageURL,
               contact: obj[key].userContact,
               date: obj[key].debitDate,
               reason: obj[key].reason
@@ -71,14 +71,12 @@ export default {
         })
     },
     getLastPaymentDate ({commit}) {
-      commit('setLoading', true)
       commit('clearResponse')
       return new Promise((resolve, reject) => {
         HTTP.get('UserDebtor/GetLastPaymentDate')
         .then((data) => {
           const lastPaymentDate = data.data
           commit('setLastPaymentDate', lastPaymentDate)
-          commit('setLoading', false)
           resolve()
         })
         .catch((error) => {
@@ -87,7 +85,6 @@ export default {
             message: error.message
           }
           commit('setResponse', response)
-          commit('setLoading', false)
           reject()
         })
       })

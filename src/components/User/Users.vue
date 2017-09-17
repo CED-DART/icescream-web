@@ -96,7 +96,7 @@
       return {
         search: '',
         pagination: {
-          rowsPerPage: 10
+          rowsPerPage: 5
         },
         headers: [
           { text: 'Nome', align: 'left', value: 'name' },

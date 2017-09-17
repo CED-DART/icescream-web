@@ -8,7 +8,7 @@
       </v-layout>
       <v-layout>
         <v-flex xs12 lg10 offset-lg1>
-          <h4 class="primary--text mt-2">Home</h4>
+          <h3 class="primary--text mt-2 mb-4 text-xs-center">Estamos há {{daysWithoutIceCream}} dias sem sorvete.</h3>
         </v-flex>        
       </v-layout>
       <v-layout v-if="loading" row wrap>
@@ -20,57 +20,112 @@
               class="primary--text"></v-progress-circular>
           </v-flex>
       </v-layout>
+      <v-layout v-else row wrap>
+        <v-flex xs12 md6>
+          <v-card>
+            <v-card-text>
+              <v-flex xs12 class="text-xs-center">
+                <img :src="debtors[0].imageUrl === undefined ? defaultImageUrl : debtors[0].imageUrl" 
+                  height="179px" 
+                  class="userProfileImage">
+              </v-flex>
+              <h3 class="primary--text headline mb-3 text-xs-center">{{debtors[0].name}}</h3>
+              <v-list subheader>
+                <v-list-tile-avatar>
+                  <v-list-tile-action>
+                    <v-icon>event</v-icon>
+                  </v-list-tile-action>
+                  <v-list-tile-content>
+                    <v-list-tile-title>{{debtors[0].date | date}}</v-list-tile-title>
+                  </v-list-tile-content>
+                </v-list-tile-avatar>
+                <v-list-tile-avatar class="mt-2">
+                  <v-list-tile-action>
+                    <v-icon>{{debtors[0].reason === 'Contrato' ? 'work' : 'cake'}}</v-icon>
+                  </v-list-tile-action>
+                  <v-list-tile-content>
+                    <v-list-tile-title>{{debtors[0].reason}}</v-list-tile-title>
+                  </v-list-tile-content>
+                </v-list-tile-avatar>
+              </v-list>                  
+            </v-card-text>
+            <v-divider v-if="user.admin"></v-divider>
+            <v-card-actions v-if="user.admin">
+              <v-spacer></v-spacer>
+              <app-confirm-payment-dialog
+                title='Confirmar Pagamento'
+                :debtor="debtors[0]">
+              </app-confirm-payment-dialog>
+            </v-card-actions>
+          </v-card>
+        </v-flex>
+        <v-flex xs12 md6>
+          <v-layout row wrap>
+            <v-flex xs12 v-for="debtor in debtors.slice(1, (debtors.length + 1))" :key="debtor.id" class="mb-2">
+              <v-card>
+                <v-card-text>
+                  <v-layout row>
+                    <v-flex xs4 class="text-xs-center">
+                      <img :src="debtor.imageUrl === null || debtor.imageUrl === '' ? defaultImageUrl : debtor.imageUrl" 
+                        height="130px" 
+                        class="userProfileImage mt-2">
+                    </v-flex>
+                    <v-flex xs8>
+                      <span class="primary--text headline mb-3">{{debtor.name}}</span>
+                      <v-list subheader>
+                        <v-list-tile-avatar>
+                          <v-list-tile-action>
+                            <v-icon>event</v-icon>
+                          </v-list-tile-action>
+                          <v-list-tile-content>
+                            <v-list-tile-title>{{debtor.date | date}}</v-list-tile-title>
+                          </v-list-tile-content>
+                        </v-list-tile-avatar>
+                        <v-list-tile-avatar class="mt-2">
+                          <v-list-tile-action>
+                            <v-icon>{{debtor.reason === 'Contrato' ? 'work' : 'cake'}}</v-icon>
+                          </v-list-tile-action>
+                          <v-list-tile-content>
+                            <v-list-tile-title>{{debtor.reason}}</v-list-tile-title>
+                          </v-list-tile-content>
+                        </v-list-tile-avatar>
+                      </v-list>
+                    </v-flex>
+                  </v-layout>                                    
+                </v-card-text>
+                <v-divider v-if="user.admin"></v-divider>
+                <v-card-actions v-if="user.admin">
+                  <v-spacer></v-spacer>
+                  <app-confirm-payment-dialog
+                    title='Confirmar Pagamento'
+                    :debtor="debtor">
+                  </app-confirm-payment-dialog>
+                </v-card-actions>
+              </v-card>
+            </v-flex>
+          </v-layout>          
+        </v-flex>
+        <v-flex xs12>
+          <v-btn block 
+            primary 
+            dark
+            large
+            router 
+            to="/debtors">
+          Ver Todos</v-btn>
+        </v-flex>
+      </v-layout>
     </v-flex>
   </v-layout>
-  <!-- <v-container fluid grid-list-md xs12 lg8 offset-lg2>
-    <v-layout row wrap>
-      <v-flex
-        v-bind="{ [`xs${card.flex}`]: true }"
-        v-for="card in cards"
-        :key="card.title"
-      >
-        <v-card>
-          <v-card-media
-            :src="card.src"
-            height="200px"
-          >
-            <v-container fill-height fluid>
-              <v-layout fill-height>
-                <v-flex xs12 align-end flexbox>
-                  <span class="headline white--text" v-text="card.title"></span>
-                </v-flex>
-              </v-layout>
-            </v-container>
-          </v-card-media>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn icon>
-              <v-icon>favorite</v-icon>
-            </v-btn>
-            <v-btn icon>
-              <v-icon>bookmark</v-icon>
-            </v-btn>
-            <v-btn icon>
-              <v-icon>share</v-icon>
-            </v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-flex>
-    </v-layout>
-  </v-container> -->
 </template>
 
 <script>
 export default {
   data () {
     return {
-      cards: [
-        { title: 'Pre-fab homes', src: '../../static/profile.jpg', flex: 12 },
-        { title: 'Favorite road trips', src: '../../static/profile.jpg', flex: 6 },
-        { title: 'Best airlines', src: '../../static/profile.jpg', flex: 6 }
-      ],
       debtors: null,
-      daysWithoutIceCream: 0
+      daysWithoutIceCream: 0,
+      defaultImageUrl: '../../static/profile.png'
     }
   },
   created () {
@@ -84,6 +139,9 @@ export default {
       })
   },
   computed: {
+    user () {
+      return this.$store.getters.user
+    },
     debtorsList () {
       return this.$store.getters.debtors
     },
@@ -96,8 +154,17 @@ export default {
   },
   watch: {
     debtorsList (value) {
-      this.debtors = value
+      if (value !== null && value !== undefined) {
+        this.debtors = value
+      }
     }
   }
 }
 </script>
+
+<style scoped>
+.userProfileImage {
+  background-color: white;
+  border-radius: 110px;
+}
+</style>
