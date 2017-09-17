@@ -25,7 +25,7 @@
           <v-card>
             <v-card-text>
               <v-flex xs12 class="text-xs-center">
-                <img :src="debtors[0].imageUrl === undefined ? defaultImageUrl : debtors[0].imageUrl" 
+                <img :src="(debtors[0].imageUrl === undefined || debtors[0].imageUrl === null || debtors[0].imageUrl === '') ? defaultImageUrl : debtors[0].imageUrl" 
                   height="179px" 
                   class="userProfileImage">
               </v-flex>
@@ -66,7 +66,7 @@
                 <v-card-text>
                   <v-layout row>
                     <v-flex xs4 class="text-xs-center">
-                      <img :src="debtor.imageUrl === null || debtor.imageUrl === '' ? defaultImageUrl : debtor.imageUrl" 
+                      <img :src="(debtor.imageUrl === undefined || debtor.imageUrl === null || debtor.imageUrl === '') ? defaultImageUrl : debtor.imageUrl" 
                         height="130px" 
                         class="userProfileImage mt-2">
                     </v-flex>
