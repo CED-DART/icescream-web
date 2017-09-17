@@ -35,7 +35,7 @@
                 <v-card-text>
                   <v-layout row>
                     <v-flex xs4 class="text-xs-center">
-                      <img :src="debtor.imageUrl === null || debtor.imageUrl === '' ? defaultImageUrl : debtor.imageUrl" height="100px" class="userProfileImage mt-2">
+                      <img :src="debtor.imageUrl === null || debtor.imageUrl === '' || debtor.imageUrl === undefined ? defaultImageUrl : debtor.imageUrl" height="100px" class="userProfileImage mt-2">
                     </v-flex>
                     <v-flex xs8>
                       <span class="primary--text headline mb-3">{{debtor.name}}</span>
