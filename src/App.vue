@@ -33,7 +33,7 @@
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-xs-only">
         <v-btn flat router to="/profile">
-          <v-icon left>settings</v-icon>
+          <v-icon left>face</v-icon>
           Meu Perfil
         </v-btn>
         <v-btn flat @click="onLogout">

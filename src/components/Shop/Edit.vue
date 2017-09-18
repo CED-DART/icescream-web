@@ -1,5 +1,5 @@
 <template>
-  <v-dialog width="450px" persistent v-model="showDialog">
+  <v-dialog width="420px" persistent v-model="showDialog">
     <v-btn icon slot="activator" v-tooltip:top="{ html: title }" class="primary--text">
       <v-icon>edit</v-icon>
     </v-btn>

@@ -11,6 +11,11 @@ export default {
     },
     setLastPaymentDate (state, payload) {
       state.lastPaymentDate = payload
+    },
+    confirmPayment (state, payload) {
+      const debtors = state.debtors
+      debtors.splice(debtors.findIndex(debtor => debtor.id === payload.id), 1)
+      state.debtors = debtors
     }
   },
   actions: {
@@ -88,6 +93,13 @@ export default {
           reject()
         })
       })
+    },
+    confirmPayment ({commit}, payload) {
+      commit('clearResponse')
+      commit('setLoading', true)
+      // TODO: Call API to confirm payment and on .then() commit 'confirmPayment'
+      commit('confirmPayment', payload)
+      commit('setLoading', false)
     }
   },
   getters: {

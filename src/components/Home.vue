@@ -20,8 +20,8 @@
           <h3 class="primary--text mt-2 mb-4 text-xs-center">Estamos há {{daysWithoutIceCream}} dias sem sorvete.</h3>
         </v-flex>        
         <v-flex xs12 md6>
-          <v-card>
-            <v-card-text class="mb-2">
+          <v-card class="mb-2">
+            <v-card-text>
               <v-flex xs12 class="text-xs-center">
                 <img :src="(debtors[0].imageUrl === undefined || debtors[0].imageUrl === null || debtors[0].imageUrl === '') ? defaultImageUrl : debtors[0].imageUrl" 
                   height="179px" 
@@ -63,13 +63,13 @@
               <v-card>
                 <v-card-text>
                   <v-layout row>
-                    <v-flex xs5 sm4 class="text-xs-center">
+                    <v-flex sm4 class="text-xs-center">
                       <img :src="(debtor.imageUrl === undefined || debtor.imageUrl === null || debtor.imageUrl === '') ? defaultImageUrl : debtor.imageUrl" 
                         height="130px" 
-                        class="userProfileImage mt-2">
+                        class="userProfileImage mt-2 hidden-xs-only">
                     </v-flex>
-                    <v-flex xs8>
-                      <span class="primary--text headline mb-3">{{debtor.name}}</span>
+                    <v-flex xs12 sm8>
+                      <h3 class="primary--text headline mb-3">{{debtor.name}}</h3>
                       <v-list subheader>
                         <v-list-tile-avatar>
                           <v-list-tile-action>
