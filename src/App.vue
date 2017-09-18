@@ -1,13 +1,9 @@
 <template>
   <v-app dark>
     <v-navigation-drawer
-      persistent
-      :mini-variant="miniVariant"
-      clipped
-      v-model="drawer"
-      enable-resize-watcher
-      v-if="userIsAuthenticated"
-    >
+      temporary
+      v-model="sideNav"
+      v-if="userIsAuthenticated">
       <v-list>
         <v-list-tile v-for="(item, i) in menuItems" :key="i" router :to="item.link" :class="item.class">
           <v-list-tile-action>
@@ -28,7 +24,7 @@
       </v-list>
     </v-navigation-drawer>
     <v-toolbar fixed v-if="userIsAuthenticated">
-      <v-btn icon dark @click.stop="miniVariant = !miniVariant">
+      <v-btn icon dark @click.stop="sideNav = !sideNav">
         <v-icon>menu</v-icon>
       </v-btn>
       <v-toolbar-title>
@@ -60,7 +56,7 @@
   export default {
     data () {
       return {
-        drawer: true,
+        sideNav: false,
         menuItems: [
           { icon: 'supervisor_account', title: 'Usuários', link: '/users', class: '' },
           { icon: 'store', title: 'Sorveterias', link: '/shops', class: '' },
@@ -68,7 +64,6 @@
           { icon: 'check', title: 'Avaliações', link: '/reviews', class: '' },
           { icon: 'face', title: 'Meu Perfil', link: '/profile', class: 'hidden-sm-and-up' }
         ],
-        miniVariant: true,
         title: 'Ice Screamer'
       }
     },

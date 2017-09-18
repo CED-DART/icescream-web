@@ -6,24 +6,22 @@
           <app-alert @dismissed="onDismissed" :response="response"></app-alert>
         </v-flex>
       </v-layout>
-      <v-layout>
-        <v-flex xs12 lg10 offset-lg1>
-          <h3 class="primary--text mt-2 mb-4 text-xs-center">Estamos há {{daysWithoutIceCream}} dias sem sorvete.</h3>
-        </v-flex>        
-      </v-layout>
       <v-layout v-if="loading" row wrap>
-          <v-flex xs12 class="mt-2 text-xs-center">
-              <v-progress-circular 
-              indeterminate 
-              v-bind:size="70" 
-              v-bind:width="7" 
-              class="primary--text"></v-progress-circular>
-          </v-flex>
+        <v-flex xs12 class="mt-2 text-xs-center">
+          <v-progress-circular 
+          indeterminate 
+          v-bind:size="70" 
+          v-bind:width="7" 
+          class="primary--text"></v-progress-circular>
+        </v-flex>
       </v-layout>
       <v-layout v-else row wrap>
+        <v-flex xs12>
+          <h3 class="primary--text mt-2 mb-4 text-xs-center">Estamos há {{daysWithoutIceCream}} dias sem sorvete.</h3>
+        </v-flex>        
         <v-flex xs12 md6>
           <v-card>
-            <v-card-text>
+            <v-card-text class="mb-2">
               <v-flex xs12 class="text-xs-center">
                 <img :src="(debtors[0].imageUrl === undefined || debtors[0].imageUrl === null || debtors[0].imageUrl === '') ? defaultImageUrl : debtors[0].imageUrl" 
                   height="179px" 
@@ -65,7 +63,7 @@
               <v-card>
                 <v-card-text>
                   <v-layout row>
-                    <v-flex xs4 class="text-xs-center">
+                    <v-flex xs5 sm4 class="text-xs-center">
                       <img :src="(debtor.imageUrl === undefined || debtor.imageUrl === null || debtor.imageUrl === '') ? defaultImageUrl : debtor.imageUrl" 
                         height="130px" 
                         class="userProfileImage mt-2">
