@@ -2,17 +2,17 @@
   <v-layout>
     <v-flex xs12>
       <v-layout row v-if="response.message !== null">
-        <v-flex xs12 lg10 offset-lg1>
+        <v-flex xs12 sm10 offset-sm1>
           <app-alert @dismissed="onDismissed" :response="response"></app-alert>
         </v-flex>
       </v-layout>
       <v-layout row>
-        <v-flex xs12 lg10 offset-lg1>
-          <h4 class="primary--text mt-2">Cadastrar Sorveteria</h4>
+        <v-flex xs12 sm10 offset-sm1>
+          <h4 class="primary--text mt-3">Cadastrar Sorveteria</h4>
         </v-flex>
       </v-layout>
       <v-layout row>
-        <v-flex xs12 lg10 offset-lg1>
+        <v-flex xs12 sm10 offset-sm1>
           <form @submit.prevent="onCreateShop">
             <v-layout row>
               <v-flex xs12>

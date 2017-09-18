@@ -2,7 +2,7 @@
   <v-layout>
     <v-flex xs12>
       <v-layout row v-if="response.message !== null">
-        <v-flex xs12 sm8 offset-sm2>
+        <v-flex xs12 md10 offset-md1>
           <app-alert @dismissed="onDismissed" :response="response"></app-alert>
         </v-flex>
       </v-layout>
@@ -16,7 +16,7 @@
           </v-flex>
       </v-layout>
       <v-layout v-else>
-        <v-flex xs12 sm8 offset-sm2>
+        <v-flex xs12 md10 offset-md1>
           <v-layout row>
             <v-flex xs12>
               <h4 class="primary--text mt-3">Editar Usuário</h4>
@@ -129,6 +129,11 @@
               </v-flex>
             </v-layout>
             <v-layout row>
+              <v-flex xs12>
+                <v-checkbox v-model="editedAdmin" dark color="primary" label="Administrador"></v-checkbox>
+              </v-flex>
+            </v-layout>
+            <v-layout row>
               <v-flex xs12 class="text-xs-center text-sm-right">
                 <v-btn 
                   class="secondary"
@@ -170,6 +175,7 @@ export default {
       newPassword: '',
       formatedBirthDate: '',
       formatedAdmissionDate: '',
+      editedAdmin: false,
       showBirthDateDialog: false,
       showAdmissionDateDialog: false,
       showPassword: false,
@@ -207,6 +213,7 @@ export default {
         this.editedBirthDate = value[0].birthDate
         this.editedAdmissionDate = value[0].admissionDate
         this.editedImageUrl = value[0].imageUrl
+        this.editedAdmin = value[0].admin
         this.formatedBirthDate = moment(this.editedBirthDate).format('DD/MM/YYYY')
         this.formatedAdmissionDate = moment(this.editedAdmissionDate).format('DD/MM/YYYY')
       }

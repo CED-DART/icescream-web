@@ -25,7 +25,7 @@
           <v-layout row>
             <v-flex xs12>
               <v-btn fab dark small class="primary" v-if="user.admin" @click.prevent="onRunScript" v-tooltip:right="{ html: 'Rodar Script de Devedores' }">
-                <v-icon dark>add</v-icon>
+                <v-icon dark>settings_backup_restore</v-icon>
               </v-btn>
             </v-flex>
           </v-layout>

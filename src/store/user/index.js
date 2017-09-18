@@ -134,7 +134,7 @@ export default {
               birthDate: obj[key].birthDate,
               admissionDate: obj[key].admissionDate,
               imageUrl: obj[key].imageURL,
-              actived: obj[key].disabled !== undefined ? obj[key].disabled : true
+              active: obj[key].active
             })
           }
           commit('setUsers', users)
@@ -168,7 +168,8 @@ export default {
             admissionDate: user.admissionDate,
             created: user.created,
             contact: user.contact,
-            imageUrl: user.imageURL
+            imageUrl: user.imageURL,
+            admin: user.isAdmin
           })
           commit('setUsers', users)
           commit('setLoading', false)
@@ -204,25 +205,30 @@ export default {
       })
     },
     enableDisableUser ({commit}, payload) {
-      HTTP.put('User/EnableDisable', {
-        idUser: payload.id,
-        active: payload.active
-      })
-      .then(() => {
-        const response = {
-          type: 'success',
-          message: `Usuário ${payload.actived ? 'desbloqueado' : 'bloqueado'} com sucesso.`
-        }
-        commit('setResponse', response)
-        commit('setLoading', false)
-      })
-      .catch((error) => {
-        const response = {
-          type: 'error',
-          message: error.message
-        }
-        commit('setResponse', response)
-        commit('setLoading', false)
+      commit('setLoading', true)
+      return new Promise((resolve, reject) => {
+        HTTP.put('User/EnableDisable', {
+          idUser: payload.id,
+          active: payload.active
+        })
+        .then(() => {
+          const response = {
+            type: 'success',
+            message: `Usuário ${payload.active ? 'desbloqueado' : 'bloqueado'} com sucesso.`
+          }
+          commit('setResponse', response)
+          commit('setLoading', false)
+          resolve()
+        })
+        .catch((error) => {
+          const response = {
+            type: 'error',
+            message: error.message
+          }
+          commit('setResponse', response)
+          commit('setLoading', false)
+          reject()
+        })
       })
     },
     changePasswordUser ({commit}, payload) {

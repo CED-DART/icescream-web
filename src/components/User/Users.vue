@@ -52,7 +52,7 @@
               <td class="text-xs-left">{{ props.item.email }}</td>
               <td class="text-xs-left">{{ props.item.birthDate | date }}</td>
               <td class="text-xs-left">{{ props.item.admissionDate | date }}</td>
-              <td class="text-xs-left">{{ props.item.actived ? 'Ativo' : 'Inativo' }}</td>
+              <td class="text-xs-left">{{ props.item.active ? 'Ativo' : 'Inativo' }}</td>
               <td class="text-xs-center">
                 <v-btn 
                   icon 
@@ -148,19 +148,19 @@
         this.$store.dispatch('clearResponse')
       },
       setDialogIcon (user) {
-        if (user.actived) {
+        if (user.active) {
           return 'lock_outline'
         }
         return 'lock_open'
       },
       setDialogTitle (user) {
-        if (user.actived) {
+        if (user.active) {
           return 'Bloquear'
         }
         return 'Desbloquear'
       },
       setDialogMessage (user) {
-        if (user.actived) {
+        if (user.active) {
           return `Deseja realmente bloquear o usuário ${user.name}?`
         }
         return `Deseja realmente desbloquear o usuário ${user.name}`
@@ -168,7 +168,9 @@
       onDialogConfirmed (user) {
         this.$store.dispatch('enableDisableUser', {
           id: user.id,
-          active: !user.actived
+          active: !user.active
+        }).then(() => {
+          user.active = !user.active
         })
       }
     }

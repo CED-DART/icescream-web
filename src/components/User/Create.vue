@@ -2,17 +2,17 @@
   <v-layout>
     <v-flex xs12>
       <v-layout row v-if="response.message !== null">
-        <v-flex xs12 lg10 offset-lg1>
+        <v-flex xs12 sm10 offset-sm1>
           <app-alert @dismissed="onDismissed" :response="response"></app-alert>
         </v-flex>
       </v-layout>
       <v-layout row>
-        <v-flex xs12 lg10 offset-lg1>
-          <h4 class="primary--text mt-2">Cadastrar Usuário</h4>
+        <v-flex xs12 sm10 offset-sm1>
+          <h4 class="primary--text mt-3">Cadastrar Usuário</h4>
         </v-flex>
       </v-layout>
       <v-layout row>
-        <v-flex xs12 lg10 offset-lg1>
+        <v-flex xs12 sm10 offset-sm1>
           <form @submit.prevent="onCreateUser">
             <v-layout row>
               <v-flex xs12>
@@ -122,7 +122,12 @@
                   prepend-icon="add_a_photo" 
                   v-model="imageUrl"></v-text-field>
               </v-flex>
-            </v-layout>            
+            </v-layout>
+            <v-layout row>
+              <v-flex xs12>
+                <v-checkbox v-model="admin" dark color="primary" label="Administrador"></v-checkbox>
+              </v-flex>
+            </v-layout>
             <v-layout row>
               <v-flex xs12 class="text-xs-center text-sm-right">
                 <v-btn 
@@ -161,6 +166,7 @@ export default {
       admissionDate: null,
       formatedAdmissionDate: '',
       password: '',
+      admin: false,
       showPassword: false,
       showBirthDateDialog: false,
       showAdmissionDateDialog: false
@@ -193,7 +199,9 @@ export default {
         admissionDate: this.admissionDate,
         contact: this.contact,
         password: this.password,
-        imageURL: this.imageUrl
+        imageURL: this.imageUrl,
+        isAdmin: this.admin,
+        active: true
       }
       this.$store.dispatch('createUser', userData)
       this.$router.push('/users')
