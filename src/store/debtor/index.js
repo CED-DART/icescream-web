@@ -53,6 +53,30 @@ export default {
           commit('setLoading', false)
         })
     },
+    getPaidDebts ({commit}) {
+      commit('clearResponse')
+      commit('setLoading', true)
+      const debtors = [
+        {
+          name: 'Reginaldo Botelho',
+          contact: 'reginaldo.botelho',
+          debitDate: '2017-09-01',
+          paymentDate: '2017-09-08',
+          reason: 'Contrato',
+          reviewIcon: 'mood'
+        },
+        {
+          name: 'Hugo de Moraes',
+          contact: 'hugobmoraes',
+          debitDate: '2017-10-12',
+          paymentDate: '2017-10-19',
+          reason: 'Contrato',
+          reviewIcon: 'stamp'
+        }
+      ]
+      commit('setDebtors', debtors)
+      commit('setLoading', false)
+    },
     createPendingDebtors ({commit}) {
       commit('setLoading', true)
       commit('clearResponse')
