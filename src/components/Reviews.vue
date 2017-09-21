@@ -28,7 +28,6 @@
                 <v-card-text>
                   <v-layout row>
                     <v-flex xs4 class="text-xs-center">
-                      <!-- <img :src="debtor.imageUrl === null || debtor.imageUrl === '' || debtor.imageUrl === undefined ? defaultImageUrl : debtor.imageUrl" height="100px" class="userProfileImage mt-2"> -->
                       <img 
                         v-if="debtor.reviewIcon === 'stamp'" 
                         src="../../static/black-stamp.png" 
@@ -38,7 +37,7 @@
                         v-else 
                         style="font-size: 100px" 
                         class="mt-4">
-                        mood
+                        {{debtor.reviewIcon}}
                       </v-icon>
                     </v-flex>
                     <v-flex xs8>
@@ -90,7 +89,7 @@
       }
     },
     created () {
-      this.$store.dispatch('getPaidDebts')
+      this.$store.dispatch('getEvaluations')
     },
     computed: {
       loading () {

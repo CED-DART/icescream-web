@@ -28,7 +28,9 @@
         <v-icon>menu</v-icon>
       </v-btn>
       <v-toolbar-title>
-        <router-link to="/" tag="span" style="cursor: pointer;">{{ title }}</router-link>
+        <router-link to="/" tag="span" style="cursor: pointer;">
+          <img src="../static/logo-horizontal.png" alt="Ice Scream" class="mt-2 logo-horizontal">
+        </router-link>        
       </v-toolbar-title>  
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-xs-only">
@@ -90,5 +92,9 @@
 
   .application > main > .container {
     min-height: 93vh;
+  }
+
+  .logo-horizontal {
+    height: 55px;
   }
 </style>

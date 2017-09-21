@@ -87,7 +87,8 @@ export default {
       dissatisfied: false,
       neutral: false,
       mood: false,
-      blackStamp: false
+      blackStamp: false,
+      evaluation: ''
     }
   },
   computed: {
@@ -97,25 +98,34 @@ export default {
   },
   methods: {
     setReview (review) {
+      this.evaluation = ''
       this.dissatisfied = false
       this.neutral = false
       this.mood = false
       this.blackStamp = false
       if (review === 'dissatisfied') {
         this.dissatisfied = true
+        this.evaluation = '1'
       } else if (review === 'neutral') {
         this.neutral = true
+        this.evaluation = '2'
       } else if (review === 'mood') {
         this.mood = true
+        this.evaluation = '3'
       } else if (review === 'blackStamp') {
         this.blackStamp = true
+        this.evaluation = '4'
       }
     },
     onSaveChanges () {
       if (!this.validReview) {
         return
       }
-      this.$store.dispatch('confirmPayment', this.debtor)
+      this.$store.dispatch('confirmPayment', {
+        idUserDebtor: this.debtor.id,
+        paymentDate: new Date(),
+        evaluation: this.evaluation
+      })
       this.showDialog = false
     }
   }

@@ -21,7 +21,7 @@
             <v-flex xs12>
               <h3 class="primary--text mt-2 mb-4 text-xs-center">Estamos há {{daysWithoutIceCream}} dias sem sorvete.</h3>
             </v-flex>
-            <v-flex xs12 md6>
+            <v-flex xs12 md6 v-if="debtors !== null">
               <v-card class="mb-2">
                 <v-card-text>
                   <v-flex xs12 class="text-xs-center">
@@ -59,7 +59,7 @@
                 </v-card-actions>
               </v-card>
             </v-flex>
-            <v-flex xs12 md6>
+            <v-flex xs12 md6 v-if="debtors !== null">
               <v-layout row wrap>
                 <v-flex xs12 v-for="debtor in debtors.slice(1, (debtors.length + 1))" :key="debtor.id" class="mb-2">
                   <v-card>
@@ -105,7 +105,7 @@
                 </v-flex>
               </v-layout>          
             </v-flex>
-            <v-flex xs12>
+            <v-flex xs12 v-if="debtor !== null">
               <v-btn block 
                 primary 
                 dark
@@ -159,6 +159,11 @@ export default {
       if (value !== null && value !== undefined) {
         this.debtors = value
       }
+    }
+  },
+  methods: {
+    onDismissed () {
+      this.$store.dispatch('clearResponse')
     }
   }
 }

@@ -30,7 +30,7 @@
             </v-flex>
           </v-layout>
           <v-layout row wrap class="mt-3">
-            <v-flex xs12 sm6 md4 lg3 v-for="debtor in debtors" :key="debtor.id" class="mb-2">
+            <v-flex xs12 sm6 md4 v-for="debtor in debtors" :key="debtor.id" class="mb-2">
               <v-card>
                 <v-card-text>
                   <v-layout row>

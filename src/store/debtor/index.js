@@ -14,7 +14,7 @@ export default {
     },
     confirmPayment (state, payload) {
       const debtors = state.debtors
-      debtors.splice(debtors.findIndex(debtor => debtor.id === payload.id), 1)
+      debtors.splice(debtors.findIndex(debtor => debtor.id === payload.idUserDebtor), 1)
       state.debtors = debtors
     }
   },
@@ -53,29 +53,33 @@ export default {
           commit('setLoading', false)
         })
     },
-    getPaidDebts ({commit}) {
+    getEvaluations ({commit}) {
       commit('clearResponse')
       commit('setLoading', true)
-      const debtors = [
-        {
-          name: 'Reginaldo Botelho',
-          contact: 'reginaldo.botelho',
-          debitDate: '2017-09-01',
-          paymentDate: '2017-09-08',
-          reason: 'Contrato',
-          reviewIcon: 'mood'
-        },
-        {
-          name: 'Hugo de Moraes',
-          contact: 'hugobmoraes',
-          debitDate: '2017-10-12',
-          paymentDate: '2017-10-19',
-          reason: 'Contrato',
-          reviewIcon: 'stamp'
-        }
-      ]
-      commit('setDebtors', debtors)
-      commit('setLoading', false)
+      HTTP.get('UserDebtor/GetAllEvaluationData')
+        .then((data) => {
+          const debtors = []
+          const obj = data.data
+          for (let key in obj) {
+            debtors.push({
+              name: obj[key].userName,
+              debitDate: obj[key].debitDate,
+              paymentDate: obj[key].paymentDate,
+              reason: obj[key].reason,
+              reviewIcon: obj[key].evaluation === '1' ? 'sentiment_dissatisfied' : obj[key].evaluation === '2' ? 'sentiment_neutral' : obj[key].evaluation === '3' ? 'mood' : 'stamp'
+            })
+          }
+          commit('setDebtors', debtors)
+          commit('setLoading', false)
+        })
+        .catch((error) => {
+          const response = {
+            type: 'error',
+            message: error.message
+          }
+          commit('setResponse', response)
+          commit('setLoading', false)
+        })
     },
     createPendingDebtors ({commit}) {
       commit('setLoading', true)
@@ -121,9 +125,24 @@ export default {
     confirmPayment ({commit}, payload) {
       commit('clearResponse')
       commit('setLoading', true)
-      // TODO: Call API to confirm payment and on .then() commit 'confirmPayment'
-      commit('confirmPayment', payload)
-      commit('setLoading', false)
+      HTTP.put('UserDebtor/RequestPayment', payload)
+        .then(() => {
+          const response = {
+            type: 'success',
+            message: 'Sorvete pago com sucesso.'
+          }
+          commit('confirmPayment', payload)
+          commit('setResponse', response)
+          commit('setLoading', false)
+        })
+        .catch((error) => {
+          const response = {
+            type: 'error',
+            message: error.message
+          }
+          commit('setResponse', response)
+          commit('setLoading', false)
+        })
     }
   },
   getters: {
