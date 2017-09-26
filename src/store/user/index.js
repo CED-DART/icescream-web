@@ -61,8 +61,10 @@ export default {
       })
     },
     recoveryUserPassword ({commit}, payload) {
+      commit('clearResponse')
+      commit('setLoading', true)
       HTTP.post('User/RecoveryPassword', {
-        email: payload.email
+        email: payload
       })
       .then(() => {
         commit('setLoading', false)
@@ -71,6 +73,7 @@ export default {
           message: 'Sua nova senha foi enviada para o seu e-mail.'
         }
         commit('setResponse', response)
+        commit('setLoading', false)
       })
       .catch((error) => {
         commit('setLoading', false)
@@ -79,6 +82,7 @@ export default {
           message: error.message
         }
         commit('setResponse', response)
+        commit('setLoading', false)
       })
     },
     autoSignIn ({commit}, payload) {
@@ -232,6 +236,8 @@ export default {
       })
     },
     changePasswordUser ({commit}, payload) {
+      commit('clearResponse')
+      commit('setLoading', true)
       return new Promise((resolve, reject) => {
         HTTP.put('User/ChangePassword', payload)
         .then(() => {
@@ -240,6 +246,7 @@ export default {
             message: 'Senha alterada com sucesso.'
           }
           commit('setResponse', response)
+          commit('setLoading', false)
           resolve()
         })
         .catch((error) => {
@@ -248,6 +255,7 @@ export default {
             message: error.message
           }
           commit('setResponse', response)
+          commit('setLoading', false)
           reject()
         })
       })
@@ -271,6 +279,33 @@ export default {
           commit('setResponse', response)
           commit('setLoading', false)
         })
+    },
+    getUserByToken ({commit}, payload) {
+      commit('setLoading', true)
+      commit('clearResponse')
+      return new Promise((resolve, reject) => {
+        HTTP.get('User/RecoveryPasswordToken', {
+          params: {
+            token: payload
+          }
+        })
+          .then((data) => {
+            resolve({
+              idUser: data.data.idUser,
+              token: data.data.token
+            })
+            commit('setLoading', false)
+          })
+          .catch(() => {
+            const response = {
+              type: 'error',
+              message: 'Token de recuperação de senha inválido.'
+            }
+            commit('setResponse', response)
+            commit('setLoading', false)
+            reject()
+          })
+      })
     }
   },
   getters: {

@@ -4,6 +4,7 @@ import Router from 'vue-router'
 import Home from '@/components/Home'
 import Login from '@/components/User/Login'
 import RecoveryPassword from '@/components/User/Recovery'
+import RecoveryToken from '@/components/User/RecoveryToken'
 import Shops from '@/components/Shop/Shops'
 import CreateShop from '@/components/Shop/Create'
 import Users from '@/components/User/Users'
@@ -34,8 +35,14 @@ export default new Router({
     },
     {
       path: '/recovery',
-      name: 'Recovery Passwrod',
+      name: 'Recovery Password',
       component: RecoveryPassword
+    },
+    {
+      path: '/recoverypassword',
+      props: true,
+      name: 'Recovery Password with Token',
+      component: RecoveryToken
     },
     {
       path: '/shops',
@@ -78,7 +85,6 @@ export default new Router({
     {
       path: '/profile',
       name: 'User Profile',
-      props: true,
       component: Profile,
       beforeEnter: AuthGuard
     },

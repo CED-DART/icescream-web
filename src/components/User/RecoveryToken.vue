@@ -16,15 +16,32 @@
           <v-card>
             <v-card-text>
               <v-container>
-                <form @submit.prevent="onRecovery">
+                <form @submit.prevent="onSubmit">
                   <v-layout row>
                     <v-flex xs12>
                       <v-text-field 
-                        name="email" 
-                        label="E-mail" 
-                        id="email"
-                        v-model="email"
-                        type="email"
+                        name="password" 
+                        label="Nova Senha" 
+                        id="password"
+                        v-model="password"
+                        :append-icon="showPassword ? 'visibility' : 'visibility_off'"
+                        :append-icon-cb="() => (showPassword = !showPassword)"
+                        class="primary--text"
+                        :type="showPassword ? 'text' : 'password'"
+                        required></v-text-field>
+                    </v-flex>
+                  </v-layout>
+                  <v-layout row>
+                    <v-flex xs12>
+                      <v-text-field 
+                        name="confirmPassword" 
+                        label="Confirmar Senha" 
+                        id="confirmPassword"
+                        v-model="confirmPassword"
+                        :append-icon="showPassword ? 'visibility' : 'visibility_off'"
+                        :append-icon-cb="() => (showPassword = !showPassword)"
+                        class="primary--text"
+                        :type="showPassword ? 'text' : 'password'"
                         required></v-text-field>
                     </v-flex>
                   </v-layout>
@@ -46,7 +63,7 @@
                         <span slot="loader" class="custom-loader">
                           <v-icon light>cached</v-icon>
                         </span>
-                        Recuperar
+                        Salvar
                       </v-btn>                      
                     </v-flex>
                   </v-layout>                
@@ -64,12 +81,24 @@
 export default {
   data () {
     return {
-      email: '',
-      windowWidth: window.innerWidth
+      password: '',
+      confirmPassword: '',
+      showPassword: false,
+      userToken: null
     }
   },
   created () {
     this.$store.dispatch('clearResponse')
+    if (this.$route.query.token === undefined) {
+      this.$router.push('/')
+    }
+    this.$store.dispatch('getUserByToken', this.$route.query.token)
+      .then((data) => {
+        this.userToken = data
+      })
+      .catch(() => {
+        this.$router.push('/')
+      })
   },
   computed: {
     response () {
@@ -79,12 +108,16 @@ export default {
       return this.$store.getters.loading
     },
     validForm () {
-      return this.email !== ''
+      return this.password !== '' && this.confirmPassword !== '' && this.password === this.confirmPassword
     }
   },
   methods: {
-    onRecovery () {
-      this.$store.dispatch('recoveryUserPassword', this.email)
+    onSubmit () {
+      this.userToken.NewPassword = this.password
+      this.$store.dispatch('changePasswordUser', this.userToken)
+        .then(() => {
+          this.$router.push('/login')
+        })
     },
     goBack () {
       this.$store.dispatch('clearResponse')
