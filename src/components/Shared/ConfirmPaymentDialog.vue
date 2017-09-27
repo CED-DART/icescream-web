@@ -45,18 +45,12 @@
                     <v-icon dark>mood</v-icon>
                   </v-btn>
                 </v-flex>
-                <v-flex xs3 v-if="!blackStamp">
-                  <img 
-                    src="../../../static/black-stamp-baw.png" 
-                    height="83px" 
-                    style="cursor: pointer"
-                    @click="setReview('blackStamp')">
-                </v-flex>
-                <v-flex xs3 v-else>
+                <v-flex xs3>
                   <img 
                     src="../../../static/black-stamp.png" 
                     height="83px" 
                     style="cursor: pointer"
+                    :class="!blackStamp ? 'gray-scale' : ''"
                     @click="setReview('blackStamp')">
                 </v-flex>
               </v-layout>
@@ -131,3 +125,10 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.gray-scale {
+  -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+  filter: grayscale(100%);
+}
+</style>
