@@ -6,63 +6,54 @@
       </v-flex>
     </v-layout>
     <v-layout row>
-      <v-flex xs12 class="text-xs-center">
-        <h3 class="primary--text">Termo de Aceite</h3>
-      </v-flex>
-    </v-layout>
-    <v-layout 
-      style="max-height: 500px"
-      class="scroll-y mt-4"
-      id="scroll-target">
-      <v-flex
-        class="mt-4"
-        v-scroll="{
-          target: '#scroll-target',
-          callback: onFinishRead
-        }">
-        <h6>Termos de aceitação</h6>
-        <p>Mussum Ipsum, cacilds vidis litro abertis. Todo mundo vê os porris que eu tomo, mas ninguém vê os tombis que eu levo! Delegadis gente finis, bibendum egestas augue arcu ut est. Admodum accumsan disputationi eu sit. Vide electram sadipscing et per. Posuere libero varius. Nullam a nisl ut ante blandit hendrerit. Aenean sit amet nisi.</p>
-        <p>Sapien in monti palavris qui num significa nadis i pareci latim.  Suco de cevadiss, é um leite divinis, qui tem lupuliz, matis, aguis e fermentis. Cevadis im ampola pa arma uma pindureta. Quem num gosta di mé, boa gentis num é.</p>
-        <p>Em pé sem cair, deitado sem dormir, sentado sem cochilar e fazendo pose. Si num tem leite então bota uma pinga aí cumpadi! Suco de cevadiss deixa as pessoas mais interessantis. Paisis, filhis, espiritis santis.</p>
-        <p>Aenean aliquam molestie leo, vitae iaculis nisl. Casamentiss faiz malandris se pirulitá. Mauris nec dolor in eros commodo tempor. Aenean aliquam molestie leo, vitae iaculis nisl. Mais vale um bebadis conhecidiss, que um alcoolatra anonimis.</p>
-        <p>Copo furadis é disculpa de bebadis, arcu quam euismod magna. Detraxit consequat et quo num tendi nada. Leite de capivaris, leite de mula manquis sem cabeça. Praesent malesuada urna nisi, quis volutpat erat hendrerit non. Nam vulputate dapibus.</p>
-        <p>Mussum Ipsum, cacilds vidis litro abertis. Todo mundo vê os porris que eu tomo, mas ninguém vê os tombis que eu levo! Delegadis gente finis, bibendum egestas augue arcu ut est. Admodum accumsan disputationi eu sit. Vide electram sadipscing et per. Posuere libero varius. Nullam a nisl ut ante blandit hendrerit. Aenean sit amet nisi.</p>
-        <p>Sapien in monti palavris qui num significa nadis i pareci latim.  Suco de cevadiss, é um leite divinis, qui tem lupuliz, matis, aguis e fermentis. Cevadis im ampola pa arma uma pindureta. Quem num gosta di mé, boa gentis num é.</p>
-        <p>Em pé sem cair, deitado sem dormir, sentado sem cochilar e fazendo pose. Si num tem leite então bota uma pinga aí cumpadi! Suco de cevadiss deixa as pessoas mais interessantis. Paisis, filhis, espiritis santis.</p>
-        <p>Aenean aliquam molestie leo, vitae iaculis nisl. Casamentiss faiz malandris se pirulitá. Mauris nec dolor in eros commodo tempor. Aenean aliquam molestie leo, vitae iaculis nisl. Mais vale um bebadis conhecidiss, que um alcoolatra anonimis.</p>
-        <p>Copo furadis é disculpa de bebadis, arcu quam euismod magna. Detraxit consequat et quo num tendi nada. Leite de capivaris, leite de mula manquis sem cabeça. Praesent malesuada urna nisi, quis volutpat erat hendrerit non. Nam vulputate dapibus.</p>
-        <p>Mussum Ipsum, cacilds vidis litro abertis. Todo mundo vê os porris que eu tomo, mas ninguém vê os tombis que eu levo! Delegadis gente finis, bibendum egestas augue arcu ut est. Admodum accumsan disputationi eu sit. Vide electram sadipscing et per. Posuere libero varius. Nullam a nisl ut ante blandit hendrerit. Aenean sit amet nisi.</p>
-        <p>Sapien in monti palavris qui num significa nadis i pareci latim.  Suco de cevadiss, é um leite divinis, qui tem lupuliz, matis, aguis e fermentis. Cevadis im ampola pa arma uma pindureta. Quem num gosta di mé, boa gentis num é.</p>
-        <p>Em pé sem cair, deitado sem dormir, sentado sem cochilar e fazendo pose. Si num tem leite então bota uma pinga aí cumpadi! Suco de cevadiss deixa as pessoas mais interessantis. Paisis, filhis, espiritis santis.</p>
-        <p>Aenean aliquam molestie leo, vitae iaculis nisl. Casamentiss faiz malandris se pirulitá. Mauris nec dolor in eros commodo tempor. Aenean aliquam molestie leo, vitae iaculis nisl. Mais vale um bebadis conhecidiss, que um alcoolatra anonimis.</p>
-        <p>Copo furadis é disculpa de bebadis, arcu quam euismod magna. Detraxit consequat et quo num tendi nada. Leite de capivaris, leite de mula manquis sem cabeça. Praesent malesuada urna nisi, quis volutpat erat hendrerit non. Nam vulputate dapibus.</p>
-      </v-flex>
-    </v-layout>
-    <v-layout row v-if="!user.acceptedTerms">
-      <v-flex xs12>
-        <v-checkbox v-model="accepted" dark color="primary" :label="checkboxLabel" class="mt-4"></v-checkbox>
-      </v-flex>
-    </v-layout>
-    <v-layout row v-if="!user.acceptedTerms">
-      <v-flex xs12 class="text-xs-right">
-        <v-btn 
-          class="primary" 
-          :disabled="!readed || !accepted"
-          :loading="loading"
-          @click="onAcceptTerms">
-          <!-- <span>
-            <v-icon dark>check</v-icon>
-          </span> -->
-          <span slot="loader" class="custom-loader">
-            <v-icon dark>cached</v-icon>
-          </span>
-          Continuar
-        </v-btn>        
-      </v-flex>
-    </v-layout>
-    <v-layout row v-if="user.acceptedTerms">
-      <v-flex xs>
-        <p class="primary--text mt-4" style="font-size: 1.3em;">Lido e aceito em {{user.acceptedTermsDate | date}}</p>
+      <v-flex xs12 lg10 offset-lg1>
+        <v-layout row>
+          <v-flex xs12 class="text-xs-center">
+            <h3 class="primary--text">Termo de Aceite</h3>
+          </v-flex>
+        </v-layout>
+        <v-layout 
+          style="max-height: 500px"
+          class="scroll-y mt-4"
+          id="scroll-target">
+          <v-flex
+            class="mt-4"
+            v-scroll="{
+              target: '#scroll-target',
+              callback: onFinishRead
+            }">
+            <h6>Termo de Aceitação</h6>
+            <p>Todo aniversário de vida e de contrato de empresa o participante deve pagar 5 litros de sorvete e também ao início de contrato deve pagar 5 litros de sorvete no primeiro pagamento, torna se inválido o pagamento de qualquer quantidade inferior a essa, os sabores são escolhidos pelo pagante, o mesmo também pode adicionar adendos como cobertura e casquinha.</p>
+            <p>Bolo são aceitos em troca do sorvete, sobre tudo passaram pelo avaliador se adequado e compatível.</p>
+            <p>Sua imagem será divulgada como devedor de sorvete ao comemorar uma dessas datas, aniversário e contrato de empresa.</p>
+            <p>Se concordar em participar não poderá mais sair, enquanto estiver trabalhando na Dart Digital.</p>
+            <p>A brincadeira de controle de sorvetes, recentemente nomeada Ice Scream é organizada pelos colaboradores da Dart Digital e não tem vínculo empregatício, nenhuma relação trabalhista, social ou mesmo econômica com a Dart Digital.</p>
+          </v-flex>
+        </v-layout>
+        <v-layout row v-if="!user.acceptedTerms">
+          <v-flex xs12>
+            <v-checkbox v-model="accepted" dark color="primary" :label="checkboxLabel" class="mt-4"></v-checkbox>
+          </v-flex>
+        </v-layout>
+        <v-layout row v-if="!user.acceptedTerms">
+          <v-flex xs12 class="text-xs-right">
+            <v-btn 
+              class="primary" 
+              :disabled="!readed || !accepted"
+              :loading="loading"
+              @click="onAcceptTerms">
+              <span slot="loader" class="custom-loader">
+                <v-icon dark>cached</v-icon>
+              </span>
+              Continuar
+            </v-btn>        
+          </v-flex>
+        </v-layout>
+        <v-layout row v-if="user.acceptedTerms">
+          <v-flex xs>
+            <p class="primary--text mt-4" style="font-size: 1.3em;">Lido e aceito em {{user.acceptedTermsDate | date}}</p>
+          </v-flex>
+        </v-layout>
       </v-flex>
     </v-layout>
   </v-container>
