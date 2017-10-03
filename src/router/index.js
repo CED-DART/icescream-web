@@ -15,6 +15,7 @@ import Profile from '@/components/User/Profile'
 import Debtors from '@/components/Debtors'
 import Reviews from '@/components/Reviews'
 import AcceptanceTerms from '@/components/AcceptanceTerms'
+import About from '@/components/About'
 
 import AuthGuard from './auth-guard'
 
@@ -104,6 +105,12 @@ export default new Router({
       path: '/terms',
       name: 'Acceptance Terms',
       component: AcceptanceTerms,
+      beforeEnter: AuthGuard
+    },
+    {
+      path: '/about',
+      name: 'About',
+      component: About,
       beforeEnter: AuthGuard
     }
   ],

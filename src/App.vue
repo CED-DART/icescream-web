@@ -5,7 +5,7 @@
       v-model="sideNav"
       v-if="userIsAuthenticated">
       <v-list>
-        <v-list-tile v-for="(item, i) in menuItems" :key="i" router :to="item.link" :class="item.class">
+        <v-list-tile v-for="(item, i) in menuItems" :key="i" :to="item.link" :class="item.class">
           <v-list-tile-action>
             <v-icon dark>{{ item.icon }}</v-icon>
           </v-list-tile-action>
@@ -34,7 +34,7 @@
       </v-toolbar-title>  
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-xs-only">
-        <v-btn flat router to="/profile">
+        <v-btn flat to="/profile">
           <v-icon left>face</v-icon>
           Meu Perfil
         </v-btn>
@@ -51,6 +51,12 @@
         </v-slide-y-transition>
       </v-container>
     </main>
+    <v-footer v-show="userIsAuthenticated">
+      <v-spacer></v-spacer>
+      <span>Desenvolvido por </span>
+      <img src="../static/logo_ced.png" alt="CED" height="25px" class="mx-1">
+      <b class="primary--text mr-3">CED - Centro de Estudos Dart</b>
+    </v-footer>
   </v-app>
 </template>
 
@@ -64,7 +70,8 @@
           { icon: 'store', title: 'Sorveterias', link: '/shops', class: '' },
           { icon: 'monetization_on', title: 'Devedores', link: '/debtors', class: '' },
           { icon: 'check', title: 'Avaliações', link: '/reviews', class: '' },
-          { icon: 'face', title: 'Meu Perfil', link: '/profile', class: 'hidden-sm-and-up' }
+          { icon: 'face', title: 'Meu Perfil', link: '/profile', class: 'hidden-sm-and-up' },
+          { icon: 'info', title: 'Sobre', link: '/about' }
         ],
         title: 'Ice Screamer'
       }
@@ -91,7 +98,7 @@
   @import './stylus/logo'
 
   .application > main > .container {
-    min-height: 93vh;
+    min-height: 89.9vh;
   }
 
   .logo-horizontal {

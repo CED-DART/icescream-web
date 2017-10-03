@@ -105,7 +105,7 @@
                 </v-flex>
               </v-layout>          
             </v-flex>
-            <v-flex xs12 v-if="debtor !== null">
+            <v-flex xs12 v-if="debtors !== null">
               <v-btn block 
                 primary 
                 dark
