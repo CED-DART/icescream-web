@@ -233,7 +233,8 @@ export default {
         admissionDate: moment(this.editedAdmissionDate).format('YYYY-MM-DDTHH:mm:ss'),
         contact: this.editedContact,
         password: this.newPassword,
-        imageURL: this.editedImageUrl
+        imageURL: this.editedImageUrl,
+        isAdmin: this.editedAdmin
       })
       .then(() => {
         this.posting = false
