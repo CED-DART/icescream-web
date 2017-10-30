@@ -50,7 +50,7 @@
                         </v-list-tile-avatar>
                         <v-list-tile-avatar class="mt-2">
                           <v-list-tile-action>
-                            <v-icon>{{debtor.reason === 'Contrato' ? 'work' : 'cake'}}</v-icon>
+                            <v-icon>{{debtor.reason.toLowerCase().includes('contrato') ? 'work' : 'cake'}}</v-icon>
                           </v-list-tile-action>
                           <v-list-tile-content>
                             <v-list-tile-title>{{debtor.reason}}</v-list-tile-title>
