@@ -3,7 +3,7 @@
     <v-flex xs12>
       <v-layout>
         <v-flex xs12 md10 offset-md1>
-          <h4 class="primary--text mt-2 mb-5">Sobre o IceScream</h4>
+          <h4 class="primary--text mt-2 mb-5">Sobre o Ice Scream</h4>
         </v-flex>        
       </v-layout>
       <v-layout row wrap mb-5>
@@ -13,14 +13,14 @@
         <v-flex xs12 md9 offset-md1>
           <p>
             A brincadeira sobre devedores de sorvete já existia antes da construção do software. <br>
-            Foi quando a equipe do Centro de Estudos Dart se propôs a planejar e desenvolver um software para controle, de forma voluntária e com muita dedicação os integrantes construíram esta aplicação, o Ice Scream.
+            Foi quando a equipe do Centro de Estudos Dart se propôs a planejar e desenvolver um software para controle, de forma voluntária, com muita dedicação os integrantes construíram esta aplicação, o Ice Scream.
           </p>
           <p>Integrantes que participaram da construção do software:</p>
           <v-layout row>
             <v-flex xs6>
               <span class="primary--text">Analista de Requisitos</span>
               <ul class="mb-3">
-                <li>Júnio Miquelin</li>
+                <li>Júnior Miquelin</li>
               </ul>
               <span class="primary--text">Analista de Testes</span>
               <ul class="mb-3">
